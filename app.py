@@ -1,10 +1,12 @@
 from flask import (Flask, render_template, request, redirect, url_for, session,
-                   flash)
+                   flash, g)
 from functools import wraps
+import sqlite3
 
 app = Flask(__name__)
 
 app.secret_key = 'my precious'
+app.database = 'sample.db'
 
 
 def login_required(f):
@@ -21,7 +23,11 @@ def login_required(f):
 @app.route('/')
 @login_required
 def home():
-    return render_template('index.html')
+    g.db = connect_db()
+    cur = g.db.execute('select * from posts')
+    posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
+    g.db.close()
+    return render_template('index.html', posts=posts)
 
 
 @app.route('/welcome')
@@ -49,6 +55,11 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
     return redirect(url_for('welcome'))
+
+
+# connect to database
+def connect_db():
+    return sqlite3.connect(app.database)
 
 if __name__ == '__main__':
     app.run(debug=True)
