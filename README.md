@@ -3,7 +3,8 @@ Discover Flask
 
 My studies about flask using discover flask videos.
 
-Original project: [Discover Flask](https://github.com/realpython/discover-flask/)
+[Github](https://github.com/realpython/discover-flask/)
+
 [Website](http://discoverflask.com/)
 
 ##List of videos
