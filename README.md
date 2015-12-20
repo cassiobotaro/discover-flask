@@ -20,5 +20,6 @@ My studies about flask using discover flask videos.
 | 5    | [Databases](http://youtu.be/_vrAjAHhUsA) |
 | 6    | [List Comprehensions](http://youtu.be/WqmqNC8Teeo) |
 | 7    | [Unit Tests](http://youtu.be/1aHNs1aEATg) |
+| 8    | [Deploying to Heroku](https://www.youtube.com/watch?v=vxiHmjKqXUg) |
 
 **You can view the entire video playlist [here](http://www.youtube.com/watch?v=WfpFUmV1d0w&list=PLLjmbh6XPGK4ISY747FUHXEl9lBxre4mM&feature=share).**
