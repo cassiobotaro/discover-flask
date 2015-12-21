@@ -5,9 +5,8 @@ from functools import wraps
 
 app = Flask(__name__)
 
-app.secret_key = 'my precious'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+import os
+app.config.from_object(os.environ['APP_SETTINGS'])
 
 db = SQLAlchemy(app)
 
