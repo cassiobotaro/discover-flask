@@ -3,6 +3,14 @@ Discover Flask
 
 My studies about flask using discover flask videos.
 
+## How to run
+
+- Clone repository
+- Make a virtualenv (`mkvirtualenv discover_flask`)
+- Install packages `pip install -r requirements.txt`
+- Setup your database uri `export DATABASE_URL="postgresql://user:password@localhost/discover_flask_dev"`
+- Setup your config `export APP_SETTINGS="config.DevelopmentConfig"` 
+
 ##Original
 
 [Github](https://github.com/realpython/discover-flask/)
