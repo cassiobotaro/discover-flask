@@ -7,6 +7,7 @@ My studies about flask using discover flask videos.
 
 - Clone repository
 - Make a virtualenv (`mkvirtualenv discover-flask`)
+- (optional) Ubuntu 14.04 requires install libffi-dev. `sudo apt-get install libffi-dev`
 - Install packages `pip install -r requirements.txt`
 - Setup your database uri and config 
 
