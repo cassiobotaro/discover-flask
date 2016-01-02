@@ -3,6 +3,7 @@ from project import bcrypt
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+from flask.ext.login import UserMixin
 
 
 class BlogPost(db.Model):
@@ -22,14 +23,14 @@ class BlogPost(db.Model):
         return '<{}>'.format(self.title)
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
 
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    password = db.Column(db.String)
     posts = relationship("BlogPost", backref="author")
 
     def __init__(self, name, email, password):
@@ -38,4 +39,4 @@ class User(db.Model):
         self.password = bcrypt.generate_password_hash(password)
 
     def __repr__(self):
-        return '<name {}>'.format(self.name)
+        return '<name {}'.format(self.name)
