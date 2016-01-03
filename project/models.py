@@ -40,4 +40,4 @@ class User(db.Model, UserMixin):
         self.password = bcrypt.generate_password_hash(password)
 
     def __repr__(self):
-        return '<name {}'.format(self.name)
+        return '<name - {}>'.format(self.name)

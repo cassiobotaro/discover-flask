@@ -1,29 +1,10 @@
+# tests/test_functional.py
+
 import unittest
 
-from flask.ext.testing import TestCase
 from flask.ext.login import current_user
 
-from project import app, db
-from project.models import User, BlogPost
-
-
-class BaseTestCase(TestCase):
-    """A base test case."""
-
-    def create_app(self):
-        app.config.from_object('config.TestConfig')
-        return app
-
-    def setUp(self):
-        db.create_all()
-        db.session.add(User("admin", "ad@min.com", "admin"))
-        db.session.add(
-            BlogPost("Test post", "This is a test. Only a test.", "admin"))
-        db.session.commit()
-
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+from base import BaseTestCase
 
 
 class FlaskTestCase(BaseTestCase):
@@ -37,6 +18,11 @@ class FlaskTestCase(BaseTestCase):
     def test_main_route_requires_login(self):
         response = self.client.get('/', follow_redirects=True)
         self.assertIn(b'Please log in to access this page', response.data)
+
+    # Ensure that welcome page loads
+    def test_welcome_route_works_as_expected(self):
+        response = self.client.get('/welcome', follow_redirects=True)
+        self.assertIn(b'Welcome to Flask!', response.data)
 
     # Ensure that posts show up on the main page
     def test_posts_show_up_on_main_page(self):
@@ -92,17 +78,6 @@ class UserViewsTests(BaseTestCase):
     def test_logout_route_requires_login(self):
         response = self.client.get('/logout', follow_redirects=True)
         self.assertIn(b'Please log in to access this page', response.data)
-
-    # Ensure user can register
-    def test_user_registeration(self):
-        with self.client:
-            response = self.client.post('register/', data=dict(
-                username='Michael', email='michael@realpython.com',
-                password='python', confirm='python'
-            ), follow_redirects=True)
-            self.assertIn(b'Welcome to Flask!', response.data)
-            self.assertTrue(current_user.name == "Michael")
-            self.assertTrue(current_user.is_active)
 
 
 if __name__ == '__main__':
