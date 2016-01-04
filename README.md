@@ -1,6 +1,8 @@
 Discover Flask
 ==============
 
+[![Build Status](https://travis-ci.org/cassiobotaro/discover-flask.svg)](https://travis-ci.org/cassiobotaro/discover-flask)
+
 My studies about flask using discover flask videos.
 
 ## How to run
