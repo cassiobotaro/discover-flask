@@ -1,6 +1,6 @@
 import os
 import coverage
-import pytest
+import unittest
 
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
@@ -17,7 +17,8 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def test():
     """Runs the unit tests without coverage."""
-    pytest.main("-v -x tests")
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
 
 
 @manager.command
@@ -26,7 +27,8 @@ def cov():
     cov = coverage.coverage(branch=True, include='project/*',
                             omit='*/__init__.py')
     cov.start()
-    pytest.main("-v -x tests")
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
     cov.stop()
     cov.save()
     print 'Coverage Summary:'
